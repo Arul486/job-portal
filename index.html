@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Job Portal for Immigration Students</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+    h1 { color: #333; }
+    .job-card, .notification { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    input { padding: 10px; width: 100%; max-width: 400px; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Job Portal for Immigration Students</h1>
+  <input type="text" id="search" placeholder="Search jobs..." onkeyup="filterJobs()" />
+
+  <div id="jobs"></div>
+
+  <h2>Notifications</h2>
+  <div id="notifications"></div>
+
+  <script>
+    const jobs = [
+      { title: "Software Developer", company: "TechCorp", location: "Toronto" },
+      { title: "Data Analyst", company: "DataPros", location: "Vancouver" },
+      { title: "Web Designer", company: "Designify", location: "Montreal" }
+    ];
+
+    const notifications = [
+      "New job postings every week!",
+      "Resume tips webinar on Friday.",
+      "Join our LinkedIn networking group."
+    ];
+
+    function showJobs(list) {
+      const jobsDiv = document.getElementById("jobs");
+      jobsDiv.innerHTML = "";
+      list.forEach(job => {
+        const jobDiv = document.createElement("div");
+        jobDiv.className = "job-card";
+        jobDiv.innerHTML = `<h3>${job.title}</h3><p>${job.company} - ${job.location}</p>`;
+        jobsDiv.appendChild(jobDiv);
+      });
+    }
+
+    function filterJobs() {
+      const searchValue = document.getElementById("search").value.toLowerCase();
+      const filtered = jobs.filter(job => job.title.toLowerCase().includes(searchValue));
+      showJobs(filtered);
+    }
+
+    function showNotifications() {
+      const notesDiv = document.getElementById("notifications");
+      notifications.forEach(note => {
+        const noteDiv = document.createElement("div");
+        noteDiv.className = "notification";
+        noteDiv.textContent = note;
+        notesDiv.appendChild(noteDiv);
+      });
+    }
+
+    showJobs(jobs);
+    showNotifications();
+  </script>
+</body>
+</html>
